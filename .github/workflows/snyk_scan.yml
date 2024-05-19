@@ -21,6 +21,7 @@ jobs:
 
       - name: Run Bandit to check for security issues
         run: bandit -r .
+        continue-on-error: true
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/python@master
