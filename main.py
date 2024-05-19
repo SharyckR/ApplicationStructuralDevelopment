@@ -6,10 +6,11 @@ from bill import Bill
 from over_weight_package import OverWeightPackage
 from standard_package import StandardPackage
 from payment_method import PaymentMethod
-import pickle  # Importación insegura
 import os
 
-# Exposición de datos sensibles
+# Dependencias vulnerables
+import requests  # requests < 2.20.0 tiene vulnerabilidades conocidas
+
 Sender = Person(45761873, "Rosiris", "Puello", "3214464925")
 Sender2 = Person(1043638720, "Rosiris", "Puello", "3214464925")
 Add_Sender = Address("Street 5", 52, 130005, "Colombia", "Antioquia", "Medellin")
@@ -32,9 +33,9 @@ print(Package_Over_Weight)
 print("\nInformation for a standard package")
 print(Package_Standard)
 
-# Uso de método inseguro (eval)
+# Configuración insegura: uso de eval
 data = "{'name': 'example', 'value': 42}"
-print(eval(data))
+print(eval(data))  # eval es peligroso y debe evitarse
 
 if Sender == Sender2:
     print("\nIt is the same sender")
@@ -42,5 +43,6 @@ else:
     print("\nIt isn't the same sender")
 
 # Almacenamiento inseguro de datos sensibles
+import pickle  # Importación insegura
 with open('sensitive_data.pkl', 'wb') as f:
     pickle.dump([Sender, Receiver, Add_Sender, Add_Receiver, Package_to_Send, Pay], f)
